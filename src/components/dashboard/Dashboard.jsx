@@ -42,7 +42,7 @@ const Dashboard = () => {
   const classes = useStyles();
 
   // CTX Store
-  const { allChats, sendChatAction } = useContext(CTX);
+  const { allChats, sendChatAction, user } = useContext(CTX);
   console.log({ allChats });
   const topics = Object.keys(allChats);
 
@@ -95,8 +95,12 @@ const Dashboard = () => {
             variant="contained"
             color="primary"
             onClick={() => {
-              sendChatAction({from: "", msg: textValue});
-              changeTextValue("")
+              sendChatAction({
+                from: user,
+                msg: textValue,
+                topic: activeTopic,
+              });
+              changeTextValue("");
             }}
           >
             Send
