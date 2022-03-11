@@ -40,10 +40,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const [allChats] = useContext(CTX);
+
+  // CTX Store
+  const { allChats, sendChatAction } = useContext(CTX);
   console.log({ allChats });
   const topics = Object.keys(allChats);
 
+  // Local State
+  const [activeTopic, changeActiveTopic] = useState(topics[0]);
   const [textValue, changeTextValue] = useState("");
 
   return (
@@ -53,20 +57,24 @@ const Dashboard = () => {
           Chat App
         </Typography>
         <Typography variant="h5" component="h5">
-          Topic placeholder
+          {activeTopic}
         </Typography>
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
               {topics.map((topic) => (
-                <ListItem key={topic} button>
+                <ListItem
+                  onClick={(e) => changeActiveTopic(e.target.innerText)}
+                  key={topic}
+                  button
+                >
                   <ListItemText primary={topic} />
                 </ListItem>
               ))}
             </List>
           </div>
           <div className={classes.chatWindow}>
-            {[{ from: "user", msg: "hello" }].map((chat, i) => (
+            {allChats[activeTopic].map((chat, i) => (
               <div className={classes.flex} key={i}>
                 <Chip label={chat.from} className={classes.chip} />
                 <Typography variant="body1" gutterBottom>
@@ -83,7 +91,13 @@ const Dashboard = () => {
             value={textValue}
             onChange={(e) => changeTextValue(e.target.value)}
           />
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              sendChatAction(textValue);
+            }}
+          >
             Send
           </Button>
         </div>
