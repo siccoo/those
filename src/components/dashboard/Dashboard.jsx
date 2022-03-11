@@ -53,10 +53,10 @@ const Dashboard = () => {
   return (
     <div>
       <Paper className={classes.root}>
-        <Typography variant="h4" component="h4">
+        <Typography variant="h5" component="h5">
           Chat App
         </Typography>
-        <Typography variant="h5" component="h5">
+        <Typography variant="p" component="p">
           {activeTopic}
         </Typography>
         <div className={classes.flex}>

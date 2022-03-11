@@ -6,12 +6,12 @@ const initState = {
     general: [
         { from: "bomi", msg: "hello" },
         { from: "michael", msg: "hello" },
-        { from: "obinna", msg: "hello" }
+        { from: "ire", msg: "hello" }
     ],
     topic2: [
         { from: "bomi", msg: "hello" },
-        { from: "bomi", msg: "hello" },
-        { from: "bomi", msg: "hello" }
+        { from: "iyke", msg: "hello" },
+        { from: "ade", msg: "hello" }
     ]
 }
 
