@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +8,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+
+import { CTX } from "../../reducer/Store";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const [allChats] = useContext(CTX);
+  console.log({ allChats });
+  const topics = Object.keys(allChats);
+
   const [textValue, changeTextValue] = useState("");
 
   return (
@@ -52,7 +58,7 @@ const Dashboard = () => {
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
-              {["topic"].map((topic) => (
+              {topics.map((topic) => (
                 <ListItem key={topic} button>
                   <ListItemText primary={topic} />
                 </ListItem>
@@ -63,7 +69,9 @@ const Dashboard = () => {
             {[{ from: "user", msg: "hello" }].map((chat, i) => (
               <div className={classes.flex} key={i}>
                 <Chip label={chat.from} className={classes.chip} />
-                <Typography variant="p">{chat.msg}</Typography>
+                <Typography variant="body1" gutterBottom>
+                  {chat.msg}
+                </Typography>
               </div>
             ))}
           </div>
