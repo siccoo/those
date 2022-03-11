@@ -95,7 +95,8 @@ const Dashboard = () => {
             variant="contained"
             color="primary"
             onClick={() => {
-              sendChatAction(textValue);
+              sendChatAction({from: "", msg: textValue});
+              changeTextValue("")
             }}
           >
             Send
